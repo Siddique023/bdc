@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy 31st Birthday Apuuu!</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Fredoka+One&family=Patrick+Hand&family=Short+Stack&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wood-dark: #2d160a;
+      --wood-light: #6b3e1e;
+      --chalk-white: #fffdf9;
+      --chalk-pink: #ff4785;
+      --chalk-yellow: #ffc837;
+      --chalk-blue: #38ef7d;
+      --chalk-mint: #00f2fe;
+      --chalk-purple: #f093fb;
+      --desk-wood: #5c3217;
+      --desk-metal: #2c3e50;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+      font-family: 'Patrick Hand', cursive;
+    }
+
+    #viewport {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      perspective: 1000px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0b0f19;
+    }
+
+    /* INITIAL START SCREEN */
+    #start-screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+      z-index: 100;
+    }
+
+    .glow-btn {
+      padding: 22px 52px;
+      font-size: clamp(22px, 5vw, 32px);
+      font-family: 'Fredoka One', cursive;
+      color: #fff;
+      background: linear-gradient(135deg, #f72585, #b5179e, #7209b7);
+      border: 4px solid #fff;
+      border-radius: 60px;
+      box-shadow: 0 10px 35px rgba(247, 37, 133, 0.7), 0 0 25px rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: pulseBtn 1.8s infinite;
+    }
+
+    .glow-btn:hover {
+      transform: scale(1.08);
+      box-shadow: 0 14px 45px rgba(247, 37, 133, 0.9), 0 0 35px rgba(255, 255, 255, 0.7);
+    }
+    .glow-btn:active {
+      transform: scale(0.96);
+    }
+
+    @keyframes pulseBtn {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* 3D CLASSROOM ENVIRONMENT */
+    #classroom-3d {
+      position: absolute;
+      width: 100vw;
+      height: 100vh;
+      transform-style: preserve-3d;
+      transform-origin: 50% 50%;
+      will-change: transform;
+      display: none;
+    }
+
+    .room-plane {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .room-back {
+      width: 100vw;
+      height: 100vh;
+      transform: translateZ(-2800px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1e293b;
+    }
+
+    .room-left {
+      width: 2800px;
+      height: 100vh;
+      left: 50%;
+      top: 0;
+      transform-origin: left center;
+      transform: rotateY(90deg) translateZ(calc(-50vw));
+      background: linear-gradient(90deg, #1e293b, #334155);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 100px;
+    }
+
+    .room-right {
+      width: 2800px;
+      height: 100vh;
+      left: 50%;
+      top: 0;
+      transform-origin: left center;
+      transform: rotateY(-90deg) translateZ(calc(-50vw)) translate3d(-2800px, 0, 0);
+      background: linear-gradient(90deg, #334155, #1e293b);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 0 100px;
+    }
+
+    .room-ceiling {
+      width: 100vw;
+      height: 2800px;
+      top: 50%;
+      left: 0;
+      transform-origin: center top;
+      transform: rotateX(-90deg) translateZ(calc(-50vh));
+      background: repeating-linear-gradient(90deg, #1e293b 0px, #1e293b 80px, #0f172a 80px, #0f172a 160px);
+    }
+
+    .room-floor {
+      width: 100vw;
+      height: 2800px;
+      top: 50%;
+      left: 0;
+      transform-origin: center top;
+      transform: rotateX(90deg) translateZ(calc(-50vh)) translate3d(0, -2800px, 0);
+      background: repeating-linear-gradient(90deg, #3a1c0d 0px, #3a1c0d 60px, #271207 60px, #271207 120px);
+    }
+
+    /* DECORATIONS & STUDENT DESKS ON BOTH SIDES (NO STUDENTS) */
+    .desk-row {
+      display: flex;
+      flex-direction: column;
+      gap: 120px;
+      align-items: center;
+    }
+
+    .student-desk {
+      width: 280px;
+      height: 160px;
+      background: linear-gradient(135deg, #8d5524, #5c3217);
+      border: 8px solid #3a1c0d;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6), inset 0 5px 15px rgba(255,255,255,0.1);
+      position: relative;
+      transform: rotateX(15deg);
+    }
+
+    /* Desk metal legs representation */
+    .student-desk::after {
+      content: "";
+      position: absolute;
+      bottom: -40px;
+      left: 20px;
+      right: 20px;
+      height: 40px;
+      background: linear-gradient(90deg, #1e293b, #475569, #1e293b);
+      border-radius: 4px;
+    }
+
+    /* Books or colorful stationery on desks to enrich palette */
+    .desk-book {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      width: 60px;
+      height: 40px;
+      background: #f72585;
+      border-radius: 4px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transform: rotate(-10deg);
+    }
+    .desk-book::before {
+      content: "";
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      height: 6px;
+      background: #4cc9f0;
+      border-radius: 2px;
+    }
+
+    .window-pane {
+      width: 200px;
+      height: 300px;
+      background: linear-gradient(135deg, #4cc9f0, #48cae4);
+      border: 8px solid #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 50px rgba(76, 201, 240, 0.5);
+    }
+
+    .poster {
+      width: 180px;
+      height: 240px;
+      background: #f72585;
+      border: 6px solid #b5179e;
+      border-radius: 8px;
+      font-family: 'Fredoka One';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    }
+
+    /* COUNTDOWN OVERLAY */
+    #countdown-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      z-index: 50;
+    }
+
+    .count-number {
+      font-family: 'Fredoka One', 'Short Stack', cursive;
+      font-size: min(35vw, 240px);
+      color: #ffc837;
+      text-shadow: 
+        5px 5px 0px #f72585,
+        -5px -5px 0px #4cc9f0,
+        0 0 40px rgba(255, 200, 55, 0.9);
+      animation: popBounce 0.9s ease-out forwards;
+      transform-origin: center;
+    }
+
+    @keyframes popBounce {
+      0% { transform: scale(0.1) rotate(-15deg); opacity: 0; }
+      50% { transform: scale(1.3) rotate(8deg); opacity: 1; }
+      75% { transform: scale(0.9) rotate(-4deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    /* CHALKBOARD CONTAINER */
+    #board-frame {
+      width: min(96vw, 2940px);
+      height: min(85vh, 1800px);
+      background: #0f1f17;
+      border: 44px solid #5c3217;
+      border-image: linear-gradient(45deg, #3a1c0d, #8d5524, #3a1c0d, #b07446) 24;
+      border-radius: 18px;
+      box-shadow: 
+        0 25px 60px rgba(0,0,0,0.9),
+        inset 0 0 120px rgba(0, 0, 0, 0.9),
+        inset 0 0 200px rgba(10, 60, 25, 0.4);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      overflow: hidden;
+      backface-visibility: hidden;
+    }
+
+    #board-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* CHALK ARTWORK & SVG */
+    .chalk-svg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* CHALK TEXT CONTAINER: POSITIONED AT TOP TO PREVENT OVERLAYING GRAPHICAL DESIGNS */
+    .chalk-text-container {
+      position: absolute;
+      top: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      text-align: center;
+      width: 85%;
+      pointer-events: none;
+    }
+
+    .chalk-main-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(40px, 12vw, 130px);
+      font-weight: 700;
+      color: var(--chalk-yellow);
+      letter-spacing: 2px;
+      line-height: 1.1;
+      text-shadow: 
+        0 0 6px rgba(255, 200, 55, 0.9),
+        3px 3px 6px rgba(0,0,0,0.9);
+      animation: chalkGlow 3s ease-in-out infinite alternate;
+    }
+
+    .chalk-sub-text {
+      font-family: 'Patrick Hand', cursive;
+      font-size: clamp(20px, 5vw, 55px);
+      color: var(--chalk-white);
+      margin-top: 20px;
+      line-height: 1.35;
+      letter-spacing: 1px;
+      text-shadow: 
+        0 0 4px rgba(255, 255, 255, 0.9),
+        2px 2px 4px rgba(0,0,0,0.9);
+    }
+
+    @keyframes chalkGlow {
+      0% { filter: drop-shadow(0 0 2px rgba(255, 200, 55, 0.5)); }
+      100% { filter: drop-shadow(0 0 8px rgba(247, 37, 133, 0.8)); }
+    }
+
+    /* CONFETTI CANVAS */
+    #confetti-canvas {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 80;
+    }
+
+    /* CLICK FOR SURPRIZE BUTTON */
+    #surprise-btn-wrap {
+      position: absolute;
+      bottom: 25px;
+      z-index: 60;
+      display: none;
+      animation: bounceIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    .surprise-btn {
+      padding: 18px 40px;
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(18px, 4.5vw, 26px);
+      color: #fff;
+      background: linear-gradient(135deg, #4cc9f0, #4361ee, #3a0ca3);
+      border: 4px solid #fff;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(67, 97, 238, 0.6), 0 0 20px rgba(255, 255, 255, 0.5);
+      animation: pulseBtn 1.6s infinite;
+    }
+
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: translateY(60px) scale(0.6); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* SURPRISE OVERLAY */
+    #surprise-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(9, 15, 25, 0.9);
+      backdrop-filter: blur(10px);
+      z-index: 90;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .scene-card {
+      position: relative;
+      width: min(95vw, 560px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #blow-action-container {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .hold-pill-btn {
+      position: relative;
+      background: #1e293b;
+      border: 3px solid #f72585;
+      border-radius: 40px;
+      padding: 14px 32px;
+      color: #fff;
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(16px, 3.8vw, 22px);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(247, 37, 133, 0.5);
+    }
+
+    .hold-progress-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, #f72585, #ffc837);
+      opacity: 0.5;
+      pointer-events: none;
+      transition: width 0.05s linear;
+    }
+
+    .candle-flame {
+      transform-origin: center bottom;
+      animation: flicker 0.25s infinite alternate ease-in-out;
+    }
+
+    @keyframes flicker {
+      0% { transform: scale(1) rotate(-2deg); }
+      100% { transform: scale(1.15, 1.25) rotate(3deg); filter: drop-shadow(0 0 12px #ffc837); }
+    }
+
+    .smoke-puff {
+      opacity: 0;
+      animation: puffUp 1.2s ease-out forwards;
+    }
+    @keyframes puffUp {
+      0% { opacity: 0.9; transform: translateY(0) scale(1); }
+      100% { opacity: 0; transform: translateY(-40px) scale(2.4); }
+    }
+
+    /* FOLDED SURPRISE NOTE */
+    #folded-note-wrapper {
+      position: absolute;
+      bottom: 40px;
+      z-index: 95;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      animation: slideUpNote 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    @keyframes slideUpNote {
+      0% { transform: translateY(120px) scale(0.6); opacity: 0; }
+      100% { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .folded-paper {
+      width: min(85vw, 380px);
+      min-height: 120px;
+      background: #fff9e6;
+      border: 2px dashed #b8860b;
+      border-radius: 8px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+      position: relative;
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      transform-style: preserve-3d;
+      transform-origin: top center;
+    }
+
+    .folded-paper.unfolded {
+      min-height: 200px;
+      background: #fffdf5;
+      border: 3px solid #d4af37;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.7);
+      transform: scale(1.06);
+    }
+
+    .note-hint-label {
+      font-family: 'Fredoka One', cursive;
+      color: #b8860b;
+      font-size: 17px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .note-content-secret {
+      display: none;
+      font-family: 'Caveat', cursive;
+      font-size: clamp(28px, 6.5vw, 38px);
+      font-weight: 700;
+      color: #e63946;
+      text-align: center;
+      animation: fadeInText 0.6s ease forwards;
+    }
+
+    @keyframes fadeInText {
+      from { opacity: 0; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* FINAL BLACKOUT AND YEAYYY SCREEN */
+    #blackout-curtain {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 150;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #yeaayyy-text {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(50px, 13vw, 95px);
+      color: #ffffff;
+      opacity: 0;
+      letter-spacing: 2px;
+      text-shadow: 0 0 25px rgba(255,255,255,0.8);
+      transition: opacity 2s ease-in;
+    }
+
+    #restart-btn {
+      display: none;
+      margin-top: 35px;
+      padding: 16px 38px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 20px;
+      color: #111;
+      background: #fff;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255,255,255,0.6);
+      animation: pulseBtn 2s infinite;
+      transition: transform 0.2s;
+    }
+    #restart-btn:hover {
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="viewport">
+
+    <!-- INITIAL SCREEN -->
+    <div id="start-screen">
+      <button id="start-btn" class="glow-btn">Start Celebration 🎉</button>
+    </div>
+
+    <!-- 3D ZOOM CLASSROOM -->
+    <div id="classroom-3d">
+      <div class="room-plane room-left">
+        <div class="desk-row">
+          <div class="student-desk"><div class="desk-book"></div></div>
+          <div class="student-desk"><div class="desk-book" style="background:#3a0ca3;"></div></div>
+          <div class="student-desk"><div class="desk-book" style="background:#4cc9f0;"></div></div>
+        </div>
+        <div class="window-pane"></div>
+        <div class="desk-row">
+          <div class="student-desk"><div class="desk-book" style="background:#7209b7;"></div></div>
+          <div class="student-desk"><div class="desk-book" style="background:#f72585;"></div></div>
+        </div>
+      </div>
+
+      <div class="room-plane room-right">
+        <div class="desk-row">
+          <div class="student-desk"><div class="desk-book" style="background:#4361ee;"></div></div>
+          <div class="student-desk"><div class="desk-book" style="background:#f72585;"></div></div>
+        </div>
+        <div class="window-pane"></div>
+        <div class="desk-row">
+          <div class="student-desk"><div class="desk-book" style="background:#7209b7;"></div></div>
+          <div class="student-desk"><div class="desk-book" style="background:#ffc837;"></div></div>
+          <div class="student-desk"><div class="desk-book" style="background:#3a0ca3;"></div></div>
+        </div>
+      </div>
+
+      <div class="room-plane room-ceiling"></div>
+      <div class="room-plane room-floor"></div>
+
+      <!-- BACK WALL: THE BLACK CHALKBOARD -->
+      <div class="room-plane room-back">
+        <div id="board-frame">
+          
+          <!-- CHALK ART SVG: PLACED AROUND THE BOARD SO TEXT DOES NOT OVERLAY -->
+          <svg class="chalk-svg" viewBox="0 0 900 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="chalk-rough" x="-5%" y="-5%" width="110%" height="110%">
+                <feTurbulence type="fractalNoise" baseFrequency="0.08" numOctaves="2" result="noise"/>
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" />
+              </filter>
+            </defs>
+
+            <!-- Rich colored chalk garlands and bunting at the top header -->
+            <g filter="url(#chalk-rough)">
+              <path d="M 50,35 Q 230,85 450,35 Q 670,85 850,35" stroke="#fffdf9" stroke-width="2.5" stroke-dasharray="6 6" fill="none"/>
+              <polygon points="120,50 145,95 95,95" fill="#ffc837" opacity="0.9"/>
+              <polygon points="250,65 275,110 225,110" fill="#ff4785" opacity="0.9"/>
+              <polygon points="380,45 405,90 355,90" fill="#38ef7d" opacity="0.9"/>
+              <polygon points="520,45 545,90 495,90" fill="#00f2fe" opacity="0.9"/>
+              <polygon points="650,65 675,110 625,110" fill="#f093fb" opacity="0.9"/>
+              <polygon points="780,50 805,95 755,95" fill="#ffc837" opacity="0.9"/>
+
+              <!-- Chalk Flowers Bottom Left -->
+              <circle cx="90" cy="510" r="14" fill="#ffc837" opacity="0.95"/>
+              <circle cx="70" cy="510" r="12" fill="#ff4785" opacity="0.85"/>
+              <circle cx="110" cy="510" r="12" fill="#ff4785" opacity="0.85"/>
+              <circle cx="90" cy="490" r="12" fill="#ff4785" opacity="0.85"/>
+              <circle cx="90" cy="530" r="12" fill="#ff4785" opacity="0.85"/>
+              <path d="M 90,530 Q 95,580 105,595" stroke="#38ef7d" stroke-width="5" fill="none"/>
+
+              <!-- Chalk Flowers Bottom Right -->
+              <circle cx="810" cy="510" r="14" fill="#ff4785" opacity="0.95"/>
+              <circle cx="790" cy="510" r="12" fill="#00f2fe" opacity="0.85"/>
+              <circle cx="830" cy="510" r="12" fill="#00f2fe" opacity="0.85"/>
+              <circle cx="810" cy="490" r="12" fill="#00f2fe" opacity="0.85"/>
+              <circle cx="810" cy="530" r="12" fill="#00f2fe" opacity="0.85"/>
+              <path d="M 810,530 Q 800,580 790,595" stroke="#38ef7d" stroke-width="5" fill="none"/>
+
+              <!-- Sparkling stars around borders -->
+              <path d="M 120,200 L 124,212 L 136,216 L 124,220 L 120,232 L 116,220 L 104,216 L 116,212 Z" fill="#ffc837"/>
+              <path d="M 780,210 L 784,222 L 796,226 L 784,230 L 780,242 L 776,230 L 764,226 L 776,222 Z" fill="#00f2fe"/>
+            </g>
+
+            <!-- ANIMAL 1: CUTE DEER (Left Side Bottom, away from text) -->
+            <g id="chalk-deer" filter="url(#chalk-rough)" transform="translate(0, 30)">
+              <path d="M 110,480 Q 140,430 155,360 L 195,365 Q 205,430 230,480 Z" fill="#b07d58" stroke="#fffdf9" stroke-width="2"/>
+              <ellipse cx="170" cy="325" rx="38" ry="32" fill="#c48f65" stroke="#fffdf9" stroke-width="2.5"/>
+              <ellipse cx="170" cy="333" rx="25" ry="16" fill="#e8c7a7" opacity="0.8"/>
+              <path d="M 153,318 Q 160,312 167,318" stroke="#2d160a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M 175,318 Q 182,312 189,318" stroke="#2d160a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <ellipse cx="171" cy="330" rx="4.5" ry="3.5" fill="#2d160a"/>
+              <path d="M 167,336 Q 171,341 175,336" stroke="#2d160a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <circle cx="150" cy="327" r="5" fill="#ff4785" opacity="0.6"/>
+              <circle cx="192" cy="327" r="5" fill="#ff4785" opacity="0.6"/>
+              <!-- Party cone -->
+              <polygon points="170,250 158,305 182,305" fill="#ff4785" stroke="#fffdf9" stroke-width="2"/>
+              <circle cx="170" cy="247" r="4.5" fill="#ffc837"/>
+            </g>
+
+            <!-- ANIMAL 2: CUTE CAT (Right Side Bottom, away from text) -->
+            <g id="chalk-cat" filter="url(#chalk-rough)" transform="translate(0, 30)">
+              <ellipse cx="730" cy="480" rx="60" ry="50" fill="#f8edeb" stroke="#fffdf9" stroke-width="2.5"/>
+              <polygon points="690,420 705,370 728,405" fill="#f8edeb" stroke="#fffdf9" stroke-width="2.5"/>
+              <polygon points="732,405 755,370 770,420" fill="#f8edeb" stroke="#fffdf9" stroke-width="2.5"/>
+              <ellipse cx="730" cy="430" rx="46" ry="38" fill="#f8edeb" stroke="#fffdf9" stroke-width="2.5"/>
+              <path d="M 708,422 Q 715,415 722,422" stroke="#2d160a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M 738,422 Q 745,415 752,422" stroke="#2d160a" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <ellipse cx="730" cy="433" rx="4" ry="3" fill="#ff4785"/>
+              <path d="M 725,437 Q 730,442 735,437" stroke="#2d160a" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <polygon points="730,345 715,395 745,395" fill="#38ef7d" stroke="#fffdf9" stroke-width="2"/>
+              <circle cx="730" cy="342" r="4.5" fill="#ffc837"/>
+            </g>
+          </svg>
+
+          <!-- THE CHALKBOARD NOTE TEXT (Positioned safely at the top) -->
+          <div class="chalk-text-container">
+            <h1 class="chalk-main-title">
+              HAPPY 31st BIRTHDAY APUUU!
+            </h1>
+            <p class="chalk-sub-text">
+              Wishing you a beloved, well-optimized, and clever-minded sweet life journey ahead.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- COUNTDOWN NUMBERS OVERLAY -->
+    <div id="countdown-overlay">
+      <div id="countdown-display"></div>
+    </div>
+
+    <!-- CONFETTI CANVAS -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- "CLICK FOR SURPRIZE" BUTTON -->
+    <div id="surprise-btn-wrap">
+      <button id="surprise-trigger-btn" class="surprise-btn">Click for Surprize 🎁</button>
+    </div>
+
+    <!-- SURPRISE OVERLAY (CAT WITH LARGER CAKE & CANDLES) -->
+    <div id="surprise-overlay">
+      <div class="scene-card">
+        
+        <!-- CAT & LARGER CAKE SVG GRAPHIC -->
+        <svg id="cat-cake-svg" viewBox="0 0 440 380" style="width: min(94vw, 440px); height: auto;" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- CAT BODY & FACE -->
+          <g id="cat-baker">
+            <ellipse cx="220" cy="140" rx="72" ry="58" fill="#fde2e4" stroke="#e09f3e" stroke-width="3"/>
+            <!-- Ears -->
+            <polygon points="160,115 178,60 205,105" fill="#fde2e4" stroke="#e09f3e" stroke-width="3"/>
+            <polygon points="168,110 180,75 198,102" fill="#ffb5a7"/>
+            <polygon points="235,105 262,60 280,115" fill="#fde2e4" stroke="#e09f3e" stroke-width="3"/>
+            <polygon points="242,102 260,75 272,110" fill="#ffb5a7"/>
+
+            <!-- Default: Eyes closed smiling (^ . ^) -->
+            <g id="cat-eyes-closed">
+              <path d="M 182,135 Q 192,123 202,135" stroke="#2d160a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+              <path d="M 238,135 Q 248,123 258,135" stroke="#2d160a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+            </g>
+
+            <!-- Cheering Eyes -->
+            <g id="cat-eyes-cheer" style="display: none;">
+              <path d="M 182,128 L 192,138 L 182,148" stroke="#2d160a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M 258,128 L 248,138 L 258,148" stroke="#2d160a" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M 210,155 Q 220,170 230,155 Z" fill="#ff4785" stroke="#2d160a" stroke-width="2"/>
+            </g>
+
+            <!-- Nose and mouth -->
+            <ellipse cx="220" cy="144" rx="4.5" ry="3.5" fill="#ff4785"/>
+            <path id="cat-mouth-closed" d="M 213,150 Q 220,158 227,150" stroke="#2d160a" stroke-width="3" stroke-linecap="round" fill="none"/>
+            
+            <!-- Cheeks -->
+            <circle cx="176" cy="147" r="9" fill="#ff99c8" opacity="0.7"/>
+            <circle cx="264" cy="147" r="9" fill="#ff99c8" opacity="0.7"/>
+
+            <!-- Whiskers -->
+            <line x1="165" y1="140" x2="132" y2="137" stroke="#2d160a" stroke-width="2.2"/>
+            <line x1="167" y1="148" x2="134" y2="152" stroke="#2d160a" stroke-width="2.2"/>
+            <line x1="275" y1="140" x2="308" y2="137" stroke="#2d160a" stroke-width="2.2"/>
+            <line x1="273" y1="148" x2="306" y2="152" stroke="#2d160a" stroke-width="2.2"/>
+
+            <!-- Mini Party Hat on Cat -->
+            <polygon points="220,50 206,98 234,98" fill="#ffc837" stroke="#e09f3e" stroke-width="2"/>
+            <circle cx="220" cy="47" r="5" fill="#ff4785"/>
+          </g>
+
+          <!-- PLATTER (Expanded for Larger Cake) -->
+          <ellipse cx="220" cy="320" rx="160" ry="26" fill="#e9ecef" stroke="#ced4da" stroke-width="3"/>
+          <ellipse cx="220" cy="314" rx="150" ry="22" fill="#fff" stroke="#dee2e6" stroke-width="2"/>
+
+          <!-- BIRTHDAY CAKE (SIGNIFICANTLY LARGER & RICHER) -->
+          <g id="cake-body">
+            <!-- Cake Base -->
+            <path d="M 80,265 Q 220,295 360,265 L 360,310 Q 220,340 80,310 Z" fill="#ffb4a2" stroke="#e5989b" stroke-width="3.5"/>
+            <!-- Frosting drips -->
+            <path d="M 80,265 Q 110,290 140,270 Q 170,295 210,270 Q 250,295 290,270 Q 320,290 360,265 L 360,245 Q 220,220 80,245 Z" fill="#fff0f3" stroke="#e5989b" stroke-width="2.5"/>
+            <!-- Cake Top Surface -->
+            <ellipse cx="220" cy="245" rx="140" ry="28" fill="#fff0f3" stroke="#e5989b" stroke-width="3.5"/>
+            
+            <!-- Cream decorations -->
+            <circle cx="105" cy="248" r="7" fill="#ff4785"/>
+            <circle cx="140" cy="256" r="7" fill="#ffc837"/>
+            <circle cx="180" cy="260" r="7" fill="#38ef7d"/>
+            <circle cx="220" cy="262" r="7" fill="#00f2fe"/>
+            <circle cx="260" cy="260" r="7" fill="#f093fb"/>
+            <circle cx="300" cy="256" r="7" fill="#ff4785"/>
+            <circle cx="335" cy="248" r="7" fill="#ffc837"/>
+          </g>
+
+          <!-- 4 CANDLES ON LARGER CAKE -->
+          <!-- CANDLE 1 (Back Left) -->
+          <g class="candle-group" id="candle-back-1">
+            <rect x="150" y="188" width="12" height="48" rx="3.5" fill="#ffccd5" stroke="#ffb3c1" stroke-width="1.8"/>
+            <path d="M 150,198 L 162,204 M 150,211 L 162,217 M 150,224 L 162,230" stroke="#ffffff" stroke-width="3"/>
+            <line x1="156" y1="188" x2="156" y2="178" stroke="#333" stroke-width="1.8"/>
+            <path class="candle-flame flame-el" d="M 156,178 C 150,168 150,158 156,152 C 162,158 162,168 156,178 Z" fill="#ffc837"/>
+            <circle class="flame-el" cx="156" cy="170" r="4" fill="#ff4785" opacity="0.8"/>
+          </g>
+
+          <!-- CANDLE 2 (Back Center-Left) -->
+          <g class="candle-group" id="candle-back-2">
+            <rect x="200" y="182" width="12" height="48" rx="3.5" fill="#ffccd5" stroke="#ffb3c1" stroke-width="1.8"/>
+            <path d="M 200,192 L 212,198 M 200,205 L 212,211 M 200,218 L 212,224" stroke="#ffffff" stroke-width="3"/>
+            <line x1="206" y1="182" x2="206" y2="172" stroke="#333" stroke-width="1.8"/>
+            <path class="candle-flame flame-el" d="M 206,172 C 200,162 200,152 206,146 C 212,152 212,162 206,172 Z" fill="#ffc837"/>
+            <circle class="flame-el" cx="206" cy="164" r="4" fill="#ff4785" opacity="0.8"/>
+          </g>
+
+          <!-- CANDLE 3 (Back Center-Right) -->
+          <g class="candle-group" id="candle-back-3">
+            <rect x="235" y="182" width="12" height="48" rx="3.5" fill="#ffccd5" stroke="#ffb3c1" stroke-width="1.8"/>
+            <path d="M 235,192 L 247,198 M 235,205 L 247,211 M 235,218 L 247,224" stroke="#ffffff" stroke-width="3"/>
+            <line x1="241" y1="182" x2="241" y2="172" stroke="#333" stroke-width="1.8"/>
+            <path class="candle-flame flame-el" d="M 241,172 C 235,162 235,152 241,146 C 247,152 247,162 241,172 Z" fill="#ffc837"/>
+            <circle class="flame-el" cx="241" cy="164" r="4" fill="#ff4785" opacity="0.8"/>
+          </g>
+
+          <!-- CANDLE 4 (Front Center) -->
+          <g class="candle-group" id="candle-front">
+            <rect x="214" y="205" width="13" height="52" rx="3.5" fill="#ff4785" stroke="#c9184a" stroke-width="2"/>
+            <path d="M 214,216 L 227,223 M 214,229 L 227,236 M 214,242 L 227,249" stroke="#ffffff" stroke-width="3.5"/>
+            <line x1="220" y1="205" x2="220" y2="194" stroke="#222" stroke-width="2.2"/>
+            <path class="candle-flame flame-el" d="M 220,194 C 212,182 212,172 220,165 C 228,172 228,182 220,194 Z" fill="#ffc837"/>
+            <circle class="flame-el" cx="220" cy="184" r="5" fill="#ff0054" opacity="0.85"/>
+          </g>
+
+          <!-- Cat Paws Holding Platter -->
+          <ellipse cx="110" cy="320" rx="16" ry="12" fill="#fde2e4" stroke="#e09f3e" stroke-width="2"/>
+          <ellipse cx="330" cy="320" rx="16" ry="12" fill="#fde2e4" stroke="#e09f3e" stroke-width="2"/>
+        </svg>
+
+        <!-- HOLD TO BLOW 2 SECONDS BUTTON -->
+        <div id="blow-action-container">
+          <div class="hold-pill-btn" id="hold-blow-btn">
+            <div class="hold-progress-fill" id="hold-progress"></div>
+            <span id="blow-btn-text">💨 Hold screen 2s to Blow Candles</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SURPRISE NOTE -->
+    <div id="folded-note-wrapper">
+      <div class="folded-paper" id="folded-note">
+        <div class="note-hint-label" id="note-tap-cue">
+          ✉️ Tap to Unfold
+        </div>
+        <div class="note-content-secret" id="note-secret-text">
+          "in your third drawer"
+        </div>
+      </div>
+    </div>
+
+    <!-- BLACKOUT CURTAIN -->
+    <div id="blackout-curtain">
+      <div id="yeaayyy-text">Yeaayyy</div>
+      <button id="restart-btn">Restart 🔄</button>
+    </div>
+
+  </div>
+
+  <script>
+    let audioCtx = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playChime(freq, type = 'sine', duration = 0.3) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.25, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {}
+    }
+
+    function playKidsChatterChorus(numText) {
+      const baseFreq = numText === "0" ? 880 : (numText === "1" ? 660 : (numText === "2" ? 520 : 440));
+      playChime(baseFreq, 'triangle', 0.8);
+
+      if (!audioCtx) return;
+      try {
+        const offsets = [0, 45, 90, 135, 180];
+        offsets.forEach((delay, idx) => {
+          setTimeout(() => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+            osc.frequency.setValueAtTime(baseFreq * (0.95 + Math.random() * 0.1), audioCtx.currentTime);
+            gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.6);
+          }, delay);
+        });
+      } catch(e) {}
+    }
+
+    function playBlowSound() {
+      if (!audioCtx) return;
+      try {
+        const bufferSize = audioCtx.sampleRate * 0.8;
+        const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const data = buffer.getChannelData(0);
+        for (let i = 0; i < bufferSize; i++) {
+          data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufferSize * 0.3));
+        }
+        const noise = audioCtx.createBufferSource();
+        noise.buffer = buffer;
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(600, audioCtx.currentTime);
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(audioCtx.destination);
+        noise.start();
+      } catch (e) {}
+    }
+
+    function playCheerChimes() {
+      const notes = [523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        setTimeout(() => playChime(freq, 'sine', 0.4), idx * 100);
+      });
+    }
+
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let confettiParticles = [];
+    let confettiActive = false;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    function fireConfetti(burstCount = 90) {
+      confettiActive = true;
+      const colors = ['#f72585', '#ffc837', '#4cc9f0', '#38ef7d', '#f093fb', '#ffffff'];
+      for (let i = 0; i < burstCount; i++) {
+        confettiParticles.push({
+          x: window.innerWidth / 2 + (Math.random() * 200 - 100),
+          y: window.innerHeight * 0.45,
+          vx: (Math.random() - 0.5) * 16,
+          vy: Math.random() * -14 - 4,
+          size: Math.random() * 9 + 5,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 12,
+          gravity: 0.38,
+          alpha: 1
+        });
+      }
+    }
+
+    function updateConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (confettiParticles.length > 0) {
+        for (let i = confettiParticles.length - 1; i >= 0; i--) {
+          const p = confettiParticles[i];
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += p.gravity;
+          p.rotation += p.rotSpeed;
+          p.alpha -= 0.005;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rotation * Math.PI) / 180);
+          ctx.globalAlpha = Math.max(0, p.alpha);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+
+          if (p.y > window.innerHeight + 50 || p.alpha <= 0) {
+            confettiParticles.splice(i, 1);
+          }
+        }
+      }
+      requestAnimationFrame(updateConfetti);
+    }
+    requestAnimationFrame(updateConfetti);
+
+    const startBtn = document.getElementById('start-btn');
+    const startScreen = document.getElementById('start-screen');
+    const classroom3D = document.getElementById('classroom-3d');
+    const countDisplay = document.getElementById('countdown-display');
+    const surpriseBtnWrap = document.getElementById('surprise-btn-wrap');
+    const surpriseTriggerBtn = document.getElementById('surprise-trigger-btn');
+    const surpriseOverlay = document.getElementById('surprise-overlay');
+    const holdBlowBtn = document.getElementById('hold-blow-btn');
+    const holdProgress = document.getElementById('hold-progress');
+    const blowBtnText = document.getElementById('blow-btn-text');
+    const foldedNoteWrapper = document.getElementById('folded-note-wrapper');
+    const foldedNote = document.getElementById('folded-note');
+    const noteTapCue = document.getElementById('note-tap-cue');
+    const noteSecretText = document.getElementById('note-secret-text');
+    const blackoutCurtain = document.getElementById('blackout-curtain');
+    const yeaayyyText = document.getElementById('yeaayyy-text');
+    const restartBtn = document.getElementById('restart-btn');
+
+    startBtn.addEventListener('click', () => {
+      initAudio();
+      startScreen.style.display = 'none';
+      classroom3D.style.display = 'block';
+      startCameraJourney();
+    });
+
+    function startCameraJourney() {
+      const totalDuration = 5200;
+      const startTime = performance.now();
+
+      const countTimeline = [
+        { time: 200, label: "3" },
+        { time: 1200, label: "2" },
+        { time: 2200, label: "1" },
+        { time: 3200, label: "0" }
+      ];
+
+      countTimeline.forEach(item => {
+        setTimeout(() => {
+          showCountPop(item.label);
+          playKidsChatterChorus(item.label);
+        }, item.time);
+      });
+
+      function showCountPop(val) {
+        countDisplay.innerHTML = `<div class="count-number">${val}</div>`;
+      }
+
+      function stepCamera(now) {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / totalDuration, 1);
+
+        let zPosition = 0;
+        if (progress < 0.62) {
+          const p1 = progress / 0.62;
+          zPosition = -2000 + (p1 * 600);
+        } else {
+          const p2 = (progress - 0.62) / (1 - 0.62);
+          const easedRush = Math.pow(p2, 3);
+          // Zoomed in further 2x deeper into the board
+          zPosition = -1400 + (easedRush * 2500); 
+        }
+
+        classroom3D.style.transform = `translateZ(${zPosition}px)`;
+
+        if (progress < 1) {
+          requestAnimationFrame(stepCamera);
+        } else {
+          countDisplay.innerHTML = "";
+          fireConfetti(110);
+
+          setTimeout(() => {
+            surpriseBtnWrap.style.display = 'block';
+          }, 8000);
+        }
+      }
+
+      requestAnimationFrame(stepCamera);
+    }
+
+    surpriseTriggerBtn.addEventListener('click', () => {
+      initAudio();
+      playChime(600, 'triangle');
+      surpriseBtnWrap.style.display = 'none';
+      surpriseOverlay.style.display = 'flex';
+      fireConfetti(60);
+    });
+
+    let holdStartTime = null;
+    let holdTimer = null;
+    let candlesBlown = false;
+    const requiredHoldTime = 2000;
+
+    function startHolding(e) {
+      if (candlesBlown) return;
+      e.preventDefault();
+      holdStartTime = performance.now();
+      blowBtnText.innerText = "💨 Keep Blowing...";
+
+      holdTimer = setInterval(() => {
+        const elapsed = performance.now() - holdStartTime;
+        const pct = Math.min((elapsed / requiredHoldTime) * 100, 100);
+        holdProgress.style.width = pct + "%";
+
+        if (pct >= 100) {
+          clearInterval(holdTimer);
+          blowOutCandlesSuccess();
+        }
+      }, 30);
+    }
+
+    function cancelHolding(e) {
+      if (candlesBlown) return;
+      clearInterval(holdTimer);
+      holdProgress.style.width = "0%";
+      blowBtnText.innerText = "💨 Hold screen 2s to Blow Candles";
+    }
+
+    holdBlowBtn.addEventListener('mousedown', startHolding);
+    window.addEventListener('mouseup', cancelHolding);
+    holdBlowBtn.addEventListener('touchstart', startHolding, { passive: false });
+    window.addEventListener('touchend', cancelHolding);
+    window.addEventListener('touchcancel', cancelHolding);
+
+    function blowOutCandlesSuccess() {
+      candlesBlown = true;
+      playBlowSound();
+
+      const flames = document.querySelectorAll('.flame-el');
+      flames.forEach(flame => {
+        flame.style.display = 'none';
+      });
+
+      const candlePositions = [
+        { x: 156, y: 170 },
+        { x: 206, y: 164 },
+        { x: 241, y: 164 },
+        { x: 220, y: 184 }
+      ];
+      const svgRoot = document.getElementById('cat-cake-svg');
+      candlePositions.forEach(pos => {
+        const smoke = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        smoke.setAttribute('cx', pos.x);
+        smoke.setAttribute('cy', pos.y);
+        smoke.setAttribute('r', '8');
+        smoke.setAttribute('fill', '#adb5bd');
+        smoke.setAttribute('class', 'smoke-puff');
+        svgRoot.appendChild(smoke);
+      });
+
+      document.getElementById('cat-eyes-closed').style.display = 'none';
+      document.getElementById('cat-eyes-cheer').style.display = 'block';
+      document.getElementById('cat-mouth-closed').style.display = 'none';
+      document.getElementById('cat-baker').style.animation = 'pulseBtn 0.6s 3 alternate';
+
+      playCheerChimes();
+      fireConfetti(120);
+
+      document.getElementById('blow-action-container').style.display = 'none';
+
+      setTimeout(() => {
+        foldedNoteWrapper.style.display = 'flex';
+      }, 700);
+    }
+
+    foldedNote.addEventListener('click', () => {
+      if (foldedNote.classList.contains('unfolded')) return;
+      initAudio();
+      playChime(750, 'sine', 0.25);
+
+      foldedNote.classList.add('unfolded');
+      noteTapCue.style.display = 'none';
+      noteSecretText.style.display = 'block';
+      fireConfetti(70);
+
+      setTimeout(() => {
+        startBlackoutFade();
+      }, 10000);
+    });
+
+    function startBlackoutFade() {
+      blackoutCurtain.style.pointerEvents = 'all';
+      blackoutCurtain.style.opacity = '1';
+
+      setTimeout(() => {
+        yeaayyyText.style.opacity = '1';
+        playChime(523.25, 'sine', 1.5);
+      }, 1200);
+
+      setTimeout(() => {
+        yeaayyyText.style.opacity = '0';
+        setTimeout(() => {
+          restartBtn.style.display = 'block';
+        }, 1500);
+      }, 4200);
+    }
+
+    restartBtn.addEventListener('click', () => {
+      window.location.reload();
+    });
+  </script>
+</body>
+</html>
